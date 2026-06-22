@@ -12,11 +12,15 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
   {
     title: "Services",
     path: "/services/",
+  },
+  {
+    title: "Contact",
+    path: "/contact/",
   }
 ];
 ---
 
-<div class="w-full bg-gray-700">
+<div class="w-full">
   <Container>
     <header class="flex flex-col lg:flex-row justify-between items-center py-2">
       <Astronav>
@@ -32,13 +36,13 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
             />
           </a>
           <div class="block lg:hidden">
-            <MenuIcon class="w-8 h-8 text-white hover:text-[#ffca28] transition-colors" />
+            <MenuIcon class="w-8 h-8 text-gray-700 hover:text-[#ffca28] transition-colors" />
           </div>
         </div>
         
         <!-- Collapsible Navigation Area -->
         <MenuItems class="hidden lg:flex lg:items-center w-full lg:w-auto mt-4 lg:mt-0 pb-4 lg:pb-0">
-          <ul class="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-6 px-4 lg:px-0">
+          <ul class="flex flex-col items-end lg:flex-row lg:items-center gap-2 lg:gap-6 px-4 lg:px-0">
             {
               menuitems.map((item, index) => (
                 <>
@@ -54,7 +58,7 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
                     <li>
                       <a
                         href={item.path}
-                        class="flex py-2 items-center text-white hover:text-[#ffca28] font-medium transition-colors"
+                        class="flex py-2 items-center text-gray-700 hover:text-[#ffca28] font-medium transition-colors"
                       >
                         <span>{item.title}</span>
                       </a>
@@ -64,11 +68,6 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
               ))
             }
           </ul>
-          
-          <!-- Mobile Specific Actions Panel -->
-          <div class="lg:hidden flex flex-col items-left mt-2 gap-4 px-4">
-            <Link id="contact-mobile" href="/contact/" size="md" block>Contact Us</Link>
-          </div>
         </MenuItems>
           
       </Astronav>
@@ -77,33 +76,6 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
 </div>
 
 <style>
-  /* Desktop Button Default Styles */
-  #contact-desktop {
-    color: #ffffff;
-    border: 2px solid #ffffff !important;
-    transition: all 0.3s ease;
-  }
-
-  #contact-desktop:hover {
-    font-size: large;
-    border-color: #ffca28 !important;
-    color: #ffca28;
-  }
-
-  /* Mobile Button Styles */
-  #contact-mobile {
-    border: 2px solid #ffffff !important;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    width: 8em;
-  }
-
-  #contact-mobile:hover {
-    font-size: large;
-    border-color: #ffca28 !important;
-    color: #ffca28;
-  }
-
   #logo-link:hover #logo {
     border-color: #ffca28;
     border-width: 2px;
