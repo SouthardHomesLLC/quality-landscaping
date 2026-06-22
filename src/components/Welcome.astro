@@ -1,26 +1,69 @@
----
-
----
-
 <div id="container" class="py-20 text-center">
   <main>
     <section id="hero" class="max-w-2xl mx-auto px-4">
-      <h1 class="text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-        Quality Landscaping
+      
+      <svg class="absolute w-0 h-0 opacity-0 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <filter id="white-outline">
+          <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated" />
+          <feFlood flood-color="#ffffff" style="flood-color:#ffffff;" flood-opacity="0.7" result="flooded" />
+          <feComposite in="flooded" in2="dilated" operator="in" result="outline" />
+          <feMerge>
+            <feMergeNode in="outline" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </svg>
+
+      <svg class="absolute w-0 h-0 opacity-0 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <filter id="orange-outline">
+          <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated" />
+          <feFlood flood-color="#D9744B" style="flood-color:#D9744B;" flood-opacity="0.4" result="flooded" />
+          <feComposite in="flooded" in2="dilated" operator="in" result="outline" />
+          <feMerge>
+            <feMergeNode in="outline" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </svg>
+
+      <h1 class="text-5xl font-extrabold tracking-tight mb-4 
+        custom-outline 
+        bg-linear-to-b from-white from-10% to-[#d36104] 
+        bg-clip-text text-transparent">
+        QUALITY LANDSCAPING
       </h1>
-      <p class="text-xl text-gray-700 mb-8">
-        Transforming your outdoor space.
+      
+      <p class="text-xl text-white mb-8 orange-custom-outline">
+        Transform your outdoor space.
       </p>
-      <div class="flex justify-center gap-4">
-        <a href="/services" class="px-6 py-3 bg-gray-600 text-white font-medium rounded shadow
-		 hover:bg-gray-800 transition">
-          Our Services
-        </a>
-        <a href="/contact" class="px-6 py-3 bg-white text-gray-700 font-medium rounded shadow border
-		 border-gray-600 hover:bg-gray-300 hover:border-gray-900 transition">
-          Contact Us
-        </a>
+
+      <div class="border-white border">
+        <h1 class="text-5xl font-extrabold tracking-tight mb-4 
+        custom-outline text-[#D9744B]">
+        QUALITY LANDSCAPING
+        </h1>
       </div>
+      
+
+      <h1 class="text-5xl font-extrabold tracking-tight mb-4 
+        custom-outline text-[#d36104]">
+        QUALITY LANDSCAPING
+      </h1>
+
+      <h1 class="text-5xl font-extrabold tracking-tight mb-4 text-[#D9744B]">
+        QUALITY LANDSCAPING
+        </h1>
     </section>
   </main>
 </div>
+
+<style>
+  /* The filter handles the outline, while Tailwind handles the text fill */
+  .custom-outline {
+    filter: url(#white-outline);
+  }
+
+  .orange-custom-outline {
+    filter: url(#orange-outline);
+  }
+</style>

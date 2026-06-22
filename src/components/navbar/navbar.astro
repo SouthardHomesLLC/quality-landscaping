@@ -1,8 +1,8 @@
 ---
 import Container from "@components/container.astro";
-import Link from "@components/ui/link.astro";
 import Dropdown from "./dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import LogoImage from "@assets/logo.png";
 
 const menuitems: Array<{ title: string; path: string; children?: Array<{ title: string; path: string }> }> = [
   {
@@ -20,7 +20,7 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
 ];
 ---
 
-<div class="w-full">
+<div class="w-full bg-[#D1D5BE]/90">
   <Container>
     <header class="flex flex-col lg:flex-row justify-between items-center py-2">
       <Astronav>
@@ -28,15 +28,15 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
         <div class="flex w-full lg:w-auto items-center justify-between px-4 lg:px-0">
           <a href="/" class="flex items-center hover:scale-110 duration-500" id="logo-link">
             <img 
-              class="h-32 w-auto object-contain brightness-115" 
-              src="/logo.png" 
+              class="h-20 w-auto object-contain brightness-115" 
+              src={LogoImage.src} 
               aria-label="Quality Landscaping LLC" 
               alt="Quality Landscaping LLC" 
               id="logo"
             />
           </a>
           <div class="block lg:hidden">
-            <MenuIcon class="w-8 h-8 text-gray-700 hover:text-[#ffca28] transition-colors" />
+            <MenuIcon class="w-8 h-8 text-[#2F4340] hover:text-[#D9744B] transition-colors" />
           </div>
         </div>
         
@@ -58,7 +58,7 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
                     <li>
                       <a
                         href={item.path}
-                        class="flex py-2 items-center text-gray-700 hover:text-[#ffca28] font-medium transition-colors"
+                        class="flex py-2 items-center text-[#2F4340] hover:text-[#D9744B] font-medium transition-colors"
                       >
                         <span>{item.title}</span>
                       </a>
@@ -77,7 +77,7 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
 
 <style>
   #logo-link:hover #logo {
-    border-color: #ffca28;
+    border-color: #D9744B;
     border-width: 2px;
   }
 </style>

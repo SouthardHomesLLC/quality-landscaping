@@ -2,7 +2,8 @@
 import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
-import background from '../assets/background.jpg'; 
+import background from "@assets/background.jpg"; 
+import '../styles/global.css';
 
 export interface Props {
   title: string;
@@ -10,7 +11,6 @@ export interface Props {
 }
 
 const { title, description = "Quality Landscaping LLC provides premium residential and commercial landscaping, lawn care, and hardscaping services across Terre Haute and the Wabash Valley." } = Astro.props;
-
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const resolvedImageWithDomain = new URL("/opengraph.jpg", Astro.site).toString();
 
@@ -24,8 +24,8 @@ const makeTitle = title
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <link rel="icon" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
 
     <SEO
@@ -55,7 +55,7 @@ const makeTitle = title
     
     <div 
       class="fixed inset-0 pointer-events-none 
-      bg-fixed bg-center bg-cover bg-no-repeat blur-[5px] scale-105 z-0"
+      bg-fixed bg-center bg-cover bg-no-repeat blur-[0px] scale-105 z-0"
       style={`background-image: url('${background.src}');`}
     ></div>
 
