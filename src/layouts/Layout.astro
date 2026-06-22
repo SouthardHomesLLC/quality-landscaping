@@ -2,7 +2,7 @@
 import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
-import background from '../assets/background.svg'; 
+import background from '../assets/background.png'; 
 
 export interface Props {
   title: string;
@@ -51,16 +51,22 @@ const makeTitle = title
     />
   </head>
 
-  <body 
-    class="flex flex-col min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" 
-    style={`background-image: url('${background.src}');`}
-  >
-    <Navbar />
+  <body class="flex flex-col min-h-screen relative overflow-x-hidden">
     
-    <main class="grow">
-      <slot />
-    </main>
+    <div 
+      class="fixed inset-0 pointer-events-none bg-fixed bg-center bg-cover bg-no-repeat blur-[100px] scale-105 z-0 bg-[#352c2c]"
+      style={`background-image: url('${background.src}');`}
+    ></div>
 
-    <Footer />
+    <div class="relative z-10 flex flex-col min-h-screen grow">
+      <Navbar />
+      
+      <main class="grow">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+
   </body>
 </html>
