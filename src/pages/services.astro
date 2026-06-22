@@ -2,18 +2,100 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import Container from "@components/container.astro";
+
+const services = [
+{ 
+    title: "Lawn Fertilization", 
+    desc: "Premium fertilization and targeted weed control to keep your turf lush and vibrant." 
+},
+{ 
+    title: "Hedge & Flower Care", 
+    desc: "Precision hedge trimming, seasonal flower installations, and regular bed maintenance." 
+},
+{ 
+    title: "Irrigation Systems", 
+    desc: "Professional system installation, maintenance, and expert repair."
+ },
+{ 
+    title: "Hardscaping", 
+    desc: "Custom designed patios, durable decks, and elegant pergolas built to expand your living space." 
+},
+{ 
+    title: "Landscape Maintenance", 
+    desc: "Comprehensive upkeep and tailored services for your entire property." 
+},
+{ 
+    title: "Outdoor LED Lighting", 
+    desc: "Energy-efficient architectural and landscape lighting layouts for ambiance and safety."
+}
+];
 ---
 
 <Layout title="Quality Landscaping Services">
-	<Container>
-		<div id="container" class="py-20 text-center">
-            <main>
-                <section id="hero" class="max-w-2xl mx-auto px-4">
-                <h1 class="text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-                    Out Services
-                </h1>
-                </section>
-            </main>
+  <div class="min-h-[75vh] flex items-center justify-center py-12">
+    <Container>
+      
+      <svg class="absolute w-0 h-0 opacity-0 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <filter id="green-outline">
+          <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated" />
+          <feFlood flood-color="#D1D5BE" style="flood-color:#D1D5BE;" flood-opacity="0.9" result="flooded" />
+          <feComposite in="flooded" in2="dilated" operator="in" result="outline" />
+          <feMerge>
+            <feMergeNode in="outline" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </svg>
+
+      <section 
+        id="hero" 
+        class="max-w-4xl mx-auto px-6 py-12 bg-[#D1D5BE]/60 backdrop-blur-md rounded-2xl shadow-xl text-center border border-white/20"
+      >
+        <h1 class="text-5xl font-extrabold text-[#2F4340] tracking-tight mb-3 custom-outline">
+          Our Services
+        </h1>
+        <p class="text-[#2F4340]/80 font-medium max-w-lg mx-auto mb-2">
+          Professional commercial and residential outdoor care across Terre Haute and the Wabash Valley.
+        </p>
+        <p class="text-[#2F4340]/80 font-medium max-w-lg mx-auto mb-10">
+            <a
+            href="tel:812-244-9432"
+            class="text-[#D9744B] font-bold"
+            >
+                Call Ray
+            </a>
+            {" at "}
+            <a
+            href="tel:812-244-9432"
+            class="text-[#D9744B] font-bold"
+            >
+                812-244-9432
+            </a>
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
+          {services.map((service) => (
+            <div class="bg-white/40 border border-white/20 p-5 rounded-xl
+             hover:bg-white/60 hover:scale-[1.02] transition-all duration-300
+             hover:border-[#2F4340]">
+                <h3 class="text-lg font-bold text-[#2F4340] flex items-center gap-2 mb-1">
+                    <span class="w-2 h-2 rounded-full bg-[#D9744B]"></span>
+                    {service.title}
+                </h3>
+                <p class="text-sm text-gray-700 leading-relaxed pl-4">
+                    {service.desc}
+                </p>
+            </div>
+          ))}
         </div>
-	</Container>
+
+      </section>
+    </Container>
+  </div>
 </Layout>
+
+<style>
+  .custom-outline {
+    filter: url(#green-outline);
+  }
+</style>
