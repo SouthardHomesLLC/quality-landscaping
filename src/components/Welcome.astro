@@ -1,6 +1,7 @@
 ---
 // src/components/Welcome.astro
 import WhyUs from "./WhyUs.astro";
+import GalleryDisplay from "@components/gallery-display.astro";
 
 //Complete LocalBusiness schema data to pass explicit signal graphs to indexing crawlers
 const homeSchema = JSON.stringify({
@@ -8,7 +9,7 @@ const homeSchema = JSON.stringify({
   "@type": "LandscapingService",
   "name": "Quality Landscape and Leisure",
   "image": new URL("/opengraph.jpg", Astro.site).toString(),
-  "telePhone": "812-244-9432",
+  "telephone": "812-244-9432",
   "email": "quadup79@gmail.com",
   "address": {
     "@type": "PostalAddress",
@@ -46,7 +47,8 @@ const homeSchema = JSON.stringify({
   <main>
     <section id="hero" class="max-w-3xl mx-auto">
       <!-- Premium Glass Backing Panel for Flawless Readability over Background Images -->
-      <div class="bg-[#D1D5BE]/60 backdrop-blur-sm rounded-3xl p-8 md:p-14 shadow-xl border border-white/40 max-w-2xl mx-auto">
+      <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl p-8 md:px-14 md:py-10
+        shadow-xl border border-white/40 max-w-2xl mx-auto">
         
         <!-- Main SEO Heading enriched with location and service tags -->
         <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-none mb-6">
@@ -65,7 +67,7 @@ const homeSchema = JSON.stringify({
         
         <!-- Subtitle Descriptor with geographic anchor -->
         <p class="text-xl md:text-2xl font-bold text-[#2F4340] tracking-wide mb-8 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]">
-          Transforming Outdoor Spaces Across Terre Haute & The Wabash Valley.
+          Professional Landscaping, Hardscaping & Outdoor Design in Terre Haute & The Wabash Valley.
         </p>
 
         <!-- Dynamic Call to Actions -->
@@ -90,12 +92,44 @@ const homeSchema = JSON.stringify({
           </a>
         </div>
       </div>
+    </section>
 
+    <section>
       <!-- Why Us Content -->
-      <div class="bg-[#D1D5BE]/60 backdrop-blur-sm rounded-3xl p-8 md:p-14 shadow-xl border border-white/40 max-w-2xl mx-auto mt-16">
+      <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl p-8 md:p-14 shadow-xl border border-white/40 max-w-4xl mx-auto mt-16">
         <WhyUs />
       </div>      
-      
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 py-10">
+      <div class="max-w-6xl mx-auto text-center mb-10 overflow-hidden 
+        rounded-2xl bg-[#D1D5BE]/80 backdrop-blur-md p-8 md:p-12 border-white/40 border">
+        <div>
+          
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] mb-3">
+          Recent Projects
+        </h2>
+        <p class="text-[#2F4340] font-semibold pb-4">
+          Browse a selection of landscaping, hardscaping, and outdoor living
+          projects completed throughout Terre Haute and the Wabash Valley.
+        </p>
+
+        <GalleryDisplay limit={6} columns={2} />
+
+        <div class="mt-10">
+          <a
+            href="/gallery"
+            class="inline-flex items-center justify-center
+            bg-[#2F4340] text-white font-bold
+            px-8 py-3.5 rounded-xl shadow-md
+            hover:bg-[#D9744B]
+            transition-colors duration-200"
+          >
+            View Full Gallery
+          </a>
+        </div>
+      </div>
     </section>
   </main>
 </div>

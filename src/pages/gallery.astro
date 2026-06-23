@@ -2,30 +2,7 @@
 import Layout from '@layouts/Layout.astro';
 import '@styles/global.css';
 import Container from "@components/container.astro";
-import { Image } from 'astro:assets';
-
-//Dynamically grab all images inside src/assets/gallery/ folder
-const imageModules = import.meta.glob<{ default: ImageMetadata }>('/src/assets/gallery/*.{jpeg,jpg,png,gif,webp}');
-
-//Resolve the files and append the structural filename context to use for dynamic SEO alt strings
-const galleryImages = await Promise.all(
-  Object.entries(imageModules).map(async ([filepath, loader]) => {
-    const mod = await loader();
-    
-    //Extract the raw filename without the extension and paths (e.g. "patios-design-terre-haute")
-    const filename = filepath.split('/').pop()?.split('.').shift() || "project";
-    
-    //Reformat filename dashes into readable spaces for human alt generation
-    const formattedAlt = filename
-      .replace(/[-_]/g, ' ')
-      .replace(/\b\w/g, (char) => char.toUpperCase());
-
-    return {
-      metadata: mod.default,
-      altText: `${formattedAlt} by Quality Landscape and Leisure`
-    };
-  })
-);
+import GalleryDisplay from "@components/gallery-display.astro";
 
 //Targeted SEO copy configuration suite
 const pageTitle = "Our Work Gallery | Quality Landscape & Leisure";
@@ -49,47 +26,9 @@ const pageDescription = "Explore our commercial and residential portfolio featur
         </section>
 
         <section class="max-w-6xl mx-auto px-4">
-          <div id="my-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {
-              galleryImages.map((item) => (
-                <a 
-                  href={item.metadata.src}
-                  data-pswp-width={item.metadata.width}
-                  data-pswp-height={item.metadata.height}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="overflow-hidden rounded-2xl block
-                  bg-white/40 border border-white/20 p-3 shadow-sm 
-                  hover:shadow-md hover:scale-105
-                  transition-all duration-300 group hover:bg-[#D1D5BE]/80 cursor-zoom-in"
-                  title={item.altText}
-                >
-                  <Image 
-                    src={item.metadata} 
-                    alt={item.altText} 
-                    widths={[240, 540, 720]}
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                    class="rounded-xl w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 bg-slate-100"
-                  />
-                </a>
-              ))
-            }
-          </div>
+          <GalleryDisplay />
         </section>
       </main>
     </div>
   </Container>
 </Layout>
-
-<script>
-  import PhotoSwipeLightbox from 'photoswipe/lightbox';
-  import 'photoswipe/style.css';
-
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: '#my-gallery',
-    children: 'a',
-    pswpModule: () => import('photoswipe')
-  });
-  
-  lightbox.init();
-</script>
