@@ -189,12 +189,15 @@ const jsonLdSchema = JSON.stringify({
   </div>
 
   <!-- Production Attribution Layer -->
-  <p class="text-gray-600 flex items-center pt-4 justify-center text-xs font-semibold">
+  <div class="text-gray-600 flex items-center pt-4 justify-center text-xs font-semibold">
     Website by 
-    <img 
-      class="w-37 pl-1.5 h-4 inline-block drop-shadow-sm filter brightness-95" 
+    <Image 
+      src={monarchLogo}
       alt="Monarch Media LLC corporate service badge" 
-      src={monarchLogo.src}
+      width={148} 
+      height={16}
+      loading="lazy"
+      class="w-[148px] h-4 pl-1.5 inline-block drop-shadow-sm filter brightness-95 object-contain"
     />
-  </p>
+  </div>
 </footer>
