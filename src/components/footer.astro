@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 
 //Import local footer branding to enable build-time image compression and optimization pipelines
 import companiesLogo from "@assets/logos/quality-companies.png";
+import monarchLogo from "@assets/logos/Monarch.png"
 
 const year = new Date().getFullYear();
 
@@ -191,7 +192,7 @@ const jsonLdSchema = JSON.stringify({
     <img 
       class="pl-1.5 h-4 inline-block drop-shadow-sm filter brightness-95" 
       alt="Monarch Media LLC corporate service badge" 
-      src="/Logos/Monarch.png"
+      src={monarchLogo.src}
     />
   </p>
 </footer>
