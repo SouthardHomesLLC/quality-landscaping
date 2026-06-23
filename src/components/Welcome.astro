@@ -1,9 +1,14 @@
-<div id="container" class="py-16 md:py-28 text-center px-4">
+---
+import WhyUs from "./WhyUs.astro";
+---
+
+<div id="container" class="py-16 md:py-20 text-center px-4">
   <main>
     <section id="hero" class="max-w-3xl mx-auto">
       
       <!-- Premium Glass Backing Panel for Flawless Readability over Background Images -->
-      <div class="bg-[#D1D5BE]/20 backdrop-blur-sm rounded-3xl p-8 md:p-14 shadow-xl border border-white/40 max-w-2xl mx-auto">
+      <div class="bg-[#D1D5BE]/60 backdrop-blur-sm rounded-3xl 
+        p-8 md:p-14 shadow-xl border border-white/40 max-w-2xl mx-auto">
         
         <!-- Main SEO Heading -->
         <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-none mb-6">
@@ -27,19 +32,33 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a 
             href="/services" 
-            class="w-full sm:w-auto bg-[#2F4340] text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:bg-[#539244] transition-colors duration-200 text-base"
+            class="w-full sm:w-auto bg-[#2F4340] text-white 
+              font-bold px-8 py-3.5 rounded-xl shadow-md 
+              hover:bg-[#D9744B] hover:border-slate-200 hover:border
+              transition-colors duration-200 text-base"
           >
             Our Services
           </a>
           <a 
             href="/contact" 
-            class="w-full sm:w-auto bg-white/80 backdrop-blur-sm text-[#2F4340] border border-slate-200 font-bold px-8 py-3.5 rounded-xl shadow-sm hover:bg-white transition-colors duration-200 text-base"
+            class="w-full sm:w-auto bg-white/80 backdrop-blur-sm 
+              text-[#2F4340] border border-slate-200 font-bold px-8 
+              py-3.5 rounded-xl shadow-sm hover:bg-[#D9744B] transition-colors 
+              duration-200 text-base"
           >
             Get a Quote
           </a>
         </div>
 
       </div>
+
+      <!-- Why Us Content -->
+      <div class="bg-[#D1D5BE]/60 backdrop-blur-sm 
+         rounded-3xl p-8 md:p-14 shadow-xl border 
+       border-white/40 max-w-2xl mx-auto mt-16">
+        <WhyUs />
+
+      </div>      
       
     </section>
   </main>
