@@ -1,8 +1,8 @@
 ---
 import { SEO } from "astro-seo";
-import Footer from "@components/footer.astro";
+import FooterContent from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
-import background from "@assets/background.jpg"; 
+import background from "@assets/background.webp"; 
 import '../styles/global.css';
 
 export interface Props {
@@ -66,7 +66,7 @@ const makeTitle = title
         <slot />
       </main>
 
-      <Footer />
+      <FooterContent />
     </div>
 
   </body>

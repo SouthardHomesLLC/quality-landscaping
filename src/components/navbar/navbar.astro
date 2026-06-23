@@ -2,7 +2,6 @@
 import Container from "@components/container.astro";
 import Dropdown from "./dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
-import LogoImage from "@assets/logo.png";
 
 const menuitems: Array<{ title: string; path: string; children?: Array<{ title: string; path: string }> }> = [
   {
@@ -16,6 +15,10 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
   {
     title: "Services",
     path: "/services/",
+  },
+  {
+    title: "Gallery",
+    path: "/gallery/",
   },
   {
     title: "Contact",
@@ -32,8 +35,8 @@ const menuitems: Array<{ title: string; path: string; children?: Array<{ title: 
         <div class="flex w-full lg:w-auto items-center justify-between px-4 lg:px-0">
           <a href="/" class="flex items-center hover:scale-110 duration-500" id="logo-link">
             <img 
-              class="h-20 w-auto object-contain brightness-115" 
-              src={LogoImage.src} 
+              class="h-20 w-auto object-contain brightness-115 rounded-full opacity-80" 
+              src="/Logos/logo.jpg"
               aria-label="Quality Landscaping LLC" 
               alt="Quality Landscaping LLC" 
               id="logo"
