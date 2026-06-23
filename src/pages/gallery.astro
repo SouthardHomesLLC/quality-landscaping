@@ -2,18 +2,75 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import Container from "@components/container.astro";
+import { Image } from 'astro:assets';
+
+//Dynamically grab all images inside src/assets/gallery/ folder
+const imageModules = import.meta.glob<{ default: ImageMetadata }>('/src/assets/gallery/*.{jpeg,jpg,png,gif,webp}');
+
+const galleryImages = await Promise.all(
+  Object.values(imageModules).map(async (loader) => {
+    const mod = await loader();
+    return mod.default;
+  })
+);
 ---
 
 <Layout title="Quality Landscape and Leisure Gallery">
-	<Container>
-		<div id="container" class="py-20 text-center">
-            <main>
-                <section id="hero" class="max-w-2xl mx-auto px-4">
-                    <h1 class="text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-                        Gallery
-                    </h1>
-                </section>
-            </main>
-        </div>
-	</Container>
+  <Container>
+    <div id="container" class="py-16 md:py-24 text-center">
+      <main>
+        <section id="hero" class="max-w-2xl mx-auto px-4 mb-12">
+            <div class="overflow-hidden rounded-2xl bg-[#D1D5BE]/80 p-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-[#2F4340] tracking-tight mb-4">
+                    Our Work Gallery
+                </h1>
+                <p class="text-gray-600 font-medium">
+                    A showcase of our premium landscapes, hardscapes, and outdoor living spaces.
+                </p>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4">
+          <div id="my-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {
+              galleryImages.map((img) => (
+                <a 
+                  href={img.src}
+                  data-pswp-width={img.width}
+                  data-pswp-height={img.height}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="overflow-hidden rounded-2xl block
+                  bg-white/40 border border-white/20 p-3 shadow-sm 
+                  hover:shadow-md hover:scale-105
+                  transition-all duration-300 group hover:bg-[#D1D5BE]/80 cursor-zoom-in"
+                >
+                  <Image 
+                    src={img} 
+                    alt="Quality Landscape project photo" 
+                    widths={[240, 540, 720]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                    class="rounded-xl w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 bg-slate-100"
+                  />
+                </a>
+              ))
+            }
+          </div>
+        </section>
+      </main>
+    </div>
+  </Container>
 </Layout>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#my-gallery',
+    children: 'a',
+    pswpModule: () => import('photoswipe')
+  });
+  
+  lightbox.init();
+</script>

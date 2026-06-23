@@ -3,99 +3,114 @@ import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import Container from "@components/container.astro";
 
-const services = [
-{ 
-    title: "Lawn Fertilization", 
-    desc: "Premium fertilization and targeted weed control to keep your turf lush and vibrant." 
-},
-{ 
-    title: "Hedge & Flower Care", 
-    desc: "Precision hedge trimming, seasonal flower installations, and regular bed maintenance." 
-},
-{ 
+const treatmentServices = [
+  { 
+    title: "Lawn Care Program", 
+    desc: "1-5 Rounds of fertilization, pre/post emergent weed control, turf pest and disease management, and aeration."
+  },
+  { 
+    title: "Emerald Ash Bore", 
+    desc: "Targeted April-August soil drench application of insecticide to ash trees to control Emerald Ash Bore."
+  },
+  { 
+    title: "Summer Spray", 
+    desc: "Early June-September spray application of insecticide for control of mites, bagworms, and other summertime unwanted insects of susceptible plant materials."
+  },
+  { 
+    title: "Dormant Oil Application", 
+    desc: "Spring application of all-natural oil for the control of scale and other over-wintering insects and eggs of susceptible plant materials."
+  },
+  { 
+    title: "Spring Fungicide Spray", 
+    desc: "3x3 Spray application for control of leaf blight on flowering trees and shrubs."
+  },
+  { 
     title: "Irrigation Systems", 
-    desc: "Professional system installation, maintenance, and expert repair."
- },
-{ 
-    title: "Hardscaping", 
-    desc: "Custom designed patios, durable decks, and elegant pergolas built to expand your living space." 
-},
-{ 
-    title: "Landscape Maintenance", 
-    desc: "Comprehensive upkeep and tailored services for your entire property." 
-},
-{ 
-    title: "Outdoor LED Lighting", 
-    desc: "Energy-efficient architectural and landscape lighting layouts for ambiance and safety."
-}
+    desc: "Professional outdoor systems support handling activation, licensed annual backflow testing, and winterization/deactivation scripts."
+  }
 ];
+
+const maintenanceService = {
+  title: "Landscape Maintenance", 
+  desc: "Comprehensive properties and seasonal upkeeps custom-tailored to protect and manage your outdoor installations through the year:",
+  details: [
+    "Early Spring Cut Back (February-April): Cutting back of overwintered ornamental grasses, liriope, butterfly bushes, hydrangeas, etc. throughout the landscape beds before new growth begins, removal of all debris.",
+    "Spring Clean Up (April-June): Prune as needed, thorough cleaning of landscape beds and outdoor area, edging beds, removal of debris, pre-emergent weed control, fertilization, and mulch.",
+    "Summer Pruning (July-September): Hand-prune of ornamental trees and shrubs to allow sunlight to reach the inner foliage and control size of plant.",
+    "Fall clean up (after most leaves are down): Cut back perennials, remove annuals located in and around your landscape beds, removal of all debris."
+  ]
+};
 ---
 
 <Layout title="Quality Landscape and Leisure Services">
   <div class="min-h-[75vh] flex items-center justify-center py-12">
     <Container>
-      
-      <svg class="absolute w-0 h-0 opacity-0 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-        <filter id="green-outline">
-          <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated" />
-          <feFlood flood-color="#D1D5BE" style="flood-color:#D1D5BE;" flood-opacity="0.9" result="flooded" />
-          <feComposite in="flooded" in2="dilated" operator="in" result="outline" />
-          <feMerge>
-            <feMergeNode in="outline" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </svg>
 
       <section 
         id="hero" 
-        class="max-w-4xl mx-auto px-6 py-12 bg-[#D1D5BE]/60 backdrop-blur-md rounded-2xl shadow-xl text-center border border-white/20"
+        class="max-w-7xl mx-auto px-6 py-12 bg-[#D1D5BE]/60 backdrop-blur-md rounded-2xl shadow-xl text-center border border-white/20"
       >
-        <h1 class="text-5xl font-extrabold text-[#2F4340] tracking-tight mb-3 custom-outline">
+        <h1 class="text-5xl font-extrabold text-[#2F4340] tracking-tight mb-3">
           Our Services
         </h1>
         <p class="text-[#2F4340]/80 font-medium max-w-lg mx-auto mb-2">
           Professional commercial and residential outdoor care across Terre Haute and the Wabash Valley.
         </p>
         <p class="text-[#2F4340]/80 font-medium max-w-lg mx-auto mb-10">
-            <a
-            href="tel:812-244-9432"
-            class="text-[#D9744B] font-bold"
-            >
-                Call Ray
-            </a>
+            <a href="tel:812-244-9432" 
+              class="text-[#D9744B] font-bold hover:text-[#2F4340] duration-300">Call Ray</a>
             {" at "}
-            <a
-            href="tel:812-244-9432"
-            class="text-[#D9744B] font-bold"
-            >
-                812-244-9432
-            </a>
+            <a href="tel:812-244-9432" 
+              class="text-[#D9744B] font-bold hover:text-[#2F4340] duration-300">812-244-9432</a>
         </p>
 
-        <div class="grid md:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
-          {services.map((service) => (
-            <div class="bg-white/40 border border-white/20 p-5 rounded-xl
-             hover:bg-white/60 hover:scale-[1.02] transition-all duration-300
-             hover:border-[#2F4340]">
-                <h3 class="text-lg font-bold text-[#2F4340] flex items-center gap-2 mb-1">
-                    <span class="w-2 h-2 rounded-full bg-[#D9744B]"></span>
-                    {service.title}
-                </h3>
-                <p class="text-sm text-gray-700 leading-relaxed pl-4">
-                    {service.desc}
-                </p>
-            </div>
-          ))}
-        </div>
+        <!-- Main Layout Split: Cascades from 2 columns to 1 at the xl breakpoint -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left w-full mx-auto items-start">
+          
+          <!-- LEFT COLUMN: Items step down to 1 column at lg viewports before the main split collapses -->
+          <div class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-6">
+            {treatmentServices.map((service) => (
+              <div class="bg-white/40 border border-white/20 p-5 rounded-xl
+               hover:bg-white/60 hover:scale-[1.02] transition-all duration-300
+               hover:border-[#2F4340] flex flex-col justify-between min-h-35 max-w-xl">
+                  <div>
+                    <h3 class="text-lg font-bold text-[#2F4340] mb-2">
+                        {service.title}
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        {service.desc}
+                    </p>
+                  </div>
+              </div>
+            ))}
+          </div>
 
+          <!-- RIGHT COLUMN: Height handles naturally, removing rigid full-scaling alignment constraints -->
+          <div class="bg-white/40 border border-white/20 p-6 rounded-xl
+           hover:bg-white/60 hover:scale-[1.01] transition-all duration-300
+           hover:border-[#2F4340]">
+              <h3 class="text-xl font-bold text-[#2F4340] mb-3">
+                  {maintenanceService.title}
+              </h3>
+              <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                  {maintenanceService.desc}
+              </p>
+              
+              <ul class="space-y-4 border-l-2 border-[#2F4340]/20 pl-4 ml-2">
+                {maintenanceService.details.map((detail) => (
+                  <li class="text-xs text-gray-700 leading-relaxed">
+                    <span class="font-semibold text-[#2F4340] block text-sm mb-0.5">
+                      {detail.split(':')[0]}:
+                    </span>
+                    <span class="text-gray-600">
+                      {detail.split(':')[1]}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+          </div>
+        </div>
       </section>
     </Container>
   </div>
 </Layout>
-
-<style>
-  .custom-outline {
-    filter: url(#green-outline);
-  }
-</style>
