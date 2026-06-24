@@ -51,28 +51,35 @@ const displayedImages =
     mdCols
   ]}>
   {
-    displayedImages.map((item) => (
-      <a
-        href={item.metadata.src}
-        data-pswp-width={item.metadata.width}
-        data-pswp-height={item.metadata.height}
-        target="_blank"
-        rel="noreferrer"
-        class="overflow-hidden rounded-2xl block
-        bg-white/40 border border-white/20 p-3 shadow-sm
-        hover:shadow-md hover:scale-105
-        transition-all duration-300 group hover:bg-[#D1D5BE]/80 cursor-zoom-in"
-        title={item.altText}
-      >
-        <Image
-          src={item.metadata}
-          alt={item.altText}
-          widths={[240, 540, 720]}
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-          class="rounded-xl w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 bg-slate-100"
-        />
-      </a>
-    ))
+    displayedImages.map((item, index) => {
+      //Prioritize the top 3 images for desktop/mobile above-the-fold speeds
+      const isCritical = index < 3;
+      
+      return (
+        <a
+          href={item.metadata.src}
+          data-pswp-width={item.metadata.width}
+          data-pswp-height={item.metadata.height}
+          target="_blank"
+          rel="noreferrer"
+          class="overflow-hidden rounded-2xl block aspect-4/3 sm:aspect-square md:aspect-4/3
+          bg-white/40 border border-white/20 p-3 shadow-sm
+          hover:shadow-md hover:scale-105
+          transition-all duration-300 group hover:bg-[#D1D5BE]/80 cursor-zoom-in"
+          title={item.altText}
+        >
+          <Image
+            src={item.metadata}
+            alt={item.altText}
+            widths={[340, 540, 720]}
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            class="rounded-xl w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-slate-100"
+            loading={isCritical ? "eager" : "lazy"}
+            fetchpriority={isCritical ? "high" : "low"}
+          />
+        </a>
+      );
+    })
   }
 </div>
 
