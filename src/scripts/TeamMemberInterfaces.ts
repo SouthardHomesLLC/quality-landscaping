@@ -1,6 +1,9 @@
+// src/scripts/TeamMemberInterfaces.ts
+import type { ImageMetadata } from 'astro';
+
 interface Avatar {
   title: string;
-  path: string;
+  imageRef: ImageMetadata;
 }
 
 export interface teamProps {
