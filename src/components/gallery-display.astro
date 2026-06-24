@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 
 interface Props {
   limit?: number;
@@ -12,7 +12,7 @@ const mdCols = columns === 2
   ? "md:grid-cols-2"
   : "md:grid-cols-3";
 
-// Grab all gallery images
+//Grab all gallery images
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/gallery/*.{jpeg,jpg,png,gif,webp}"
 );
@@ -28,8 +28,15 @@ let galleryImages = await Promise.all(
       .replace(/[-_]/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
+    const optimizedLargeImg = await getImage({
+      src: mod.default,
+      width: 1200, 
+      format: 'webp'
+    });
+
     return {
       metadata: mod.default,
+      lightboxSrc: optimizedLargeImg.src, //guarantees production URL
       altText: `${formattedAlt} by Quality Landscape and Leisure`
     };
   })
@@ -39,7 +46,6 @@ galleryImages.sort((a, b) =>
   a.metadata.src.localeCompare(b.metadata.src)
 );
 
-//limit the number of images if limit is valid
 const displayedImages =
   typeof limit === "number"
     ? galleryImages.slice(0, limit)
@@ -52,12 +58,11 @@ const displayedImages =
   ]}>
   {
     displayedImages.map((item, index) => {
-      //Prioritize the top 3 images for desktop/mobile above-the-fold speeds
       const isCritical = index < 3;
       
       return (
         <a
-          href={item.metadata.src}
+          href={item.lightboxSrc}
           data-pswp-width={item.metadata.width}
           data-pswp-height={item.metadata.height}
           target="_blank"
