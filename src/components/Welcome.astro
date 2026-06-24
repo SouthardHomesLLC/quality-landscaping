@@ -2,6 +2,9 @@
 // src/components/Welcome.astro
 import WhyUs from "./WhyUs.astro";
 import GalleryDisplay from "@components/gallery-display.astro";
+import TeamDisplay, { team } from '@components/TeamDisplay.astro';
+import type { teamProps } from "@scripts/TeamMemberInterfaces.ts";
+import TrustBanner from "./TrustBanner.astro";
 
 //Complete LocalBusiness schema data to pass explicit signal graphs to indexing crawlers
 const homeSchema = JSON.stringify({
@@ -36,6 +39,11 @@ const homeSchema = JSON.stringify({
       "name": "Wabash Valley"
     }
   ],
+    "member": team.map((member: teamProps) => ({
+      "@type": "Person",
+      "name": member.name,
+      "jobTitle": member.title
+    })),
   "priceRange": "$$"
 });
 ---
@@ -45,6 +53,8 @@ const homeSchema = JSON.stringify({
 
 <div id="container" class="py-16 md:py-20 text-center px-4">
   <main>
+
+    <!-- Main Section -->
     <section id="hero" class="max-w-3xl mx-auto">
       <!-- Premium Glass Backing Panel for Flawless Readability over Background Images -->
       <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl p-8 md:px-14 md:py-10
@@ -94,10 +104,54 @@ const homeSchema = JSON.stringify({
       </div>
     </section>
 
-    <section>
-      <!-- Why Us Content -->
-      <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl p-8 md:p-14 shadow-xl border border-white/40 max-w-4xl mx-auto mt-16">
+    <!-- Services Card -->
+    <section id="services-preview" class="max-w-5xl mx-auto mt-16 px-4">
+      <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl p-8 md:p-14 
+        shadow-xl border border-white/40 max-w-4xl mx-auto mt-12">
+        <div class="text-center mb-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] tracking-tight">
+            Services
+          </h2>
+          <div class="w-28 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full mb-6"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {[
+            { title: "Hardscaping", desc: "Custom patios, retaining walls, walkways & outdoor living setups." },
+            { title: "Landscape Design", desc: "Premium planting beds, sod installation & turf renovations." },
+            { title: "Property Maintenance", desc: "Routine mowing, seasonal cleanups & commercial care." },
+            { title: "Outdoor Leisure", desc: "Landscape lighting, fire pits & outdoor entertainment design." }
+          ].map(service => (
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-white/40 shadow-sm text-left flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-[#2F4340] mb-2">{service.title}</h3>
+                <p class="text-sm text-slate-600 font-medium">{service.desc}</p>
+              </div>
+              <a href="/services" 
+                class="text-sm font-bold text-[#D9744B] mt-4 inline-block hover:underline">
+                Learn More →</a>
+            </div>
+          ))}
+        </div>
+      </div>   
+    </section>
+
+    <!-- Why Us Content -->
+    <section id="why-us" class="max-w-5xl mx-auto mt-16 px-4">
+
+      <TrustBanner />
+
+      <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl 
+        p-8 md:p-14 shadow-xl border border-white/40 max-w-4xl mx-auto mt-16">
+        
+        <div class="text-center mb-6">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] tracking-tight">
+            Why Choose Us?
+          </h2>
+          <div class="w-60 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full"></div>
+        </div>
         <WhyUs />
+
       </div>      
     </section>
 
@@ -106,11 +160,12 @@ const homeSchema = JSON.stringify({
       <div class="max-w-6xl mx-auto text-center mb-10 overflow-hidden 
         rounded-2xl bg-[#D1D5BE]/80 backdrop-blur-md p-8 md:p-12 border-white/40 border">
         <div>
-          
+            
         </div>
         <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] mb-3">
           Recent Projects
         </h2>
+        <div class="w-70 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full mb-6"></div>
         <p class="text-[#2F4340] font-semibold pb-4">
           Browse a selection of landscaping, hardscaping, and outdoor living
           projects completed throughout Terre Haute and the Wabash Valley.
@@ -124,12 +179,51 @@ const homeSchema = JSON.stringify({
             class="inline-flex items-center justify-center
             bg-[#2F4340] text-white font-bold
             px-8 py-3.5 rounded-xl shadow-md
-            hover:bg-[#D9744B]
+            hover:bg-[#D9744B] hover:border hover:border-white
             transition-colors duration-200"
           >
             Explore Our Project Gallery
           </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Extra Content -->
+    <section>
+      <div class="max-w-6xl mx-auto text-center mb-10 overflow-hidden 
+        rounded-2xl bg-[#D1D5BE]/80 backdrop-blur-md p-8 md:p-12 border-white/40 border">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] mb-3">
+          Landscaping & Hardscaping Services in Terre Haute
+        </h2>
+
+        <div class="w-96 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full mb-6"></div>
+
+        <p class="font-semibold mb-3 text-[#2F4340]">
+        Quality Landscape and Leisure proudly provides landscaping,
+        hardscaping, lawn maintenance, retaining walls, patios,
+        landscape lighting, and outdoor living solutions throughout
+        Terre Haute and the Wabash Valley.
+        </p>
+
+        <p class="font-semibold text-[#2F4340]">
+        Whether you're improving curb appeal, creating a backyard
+        entertainment space, or maintaining a commercial property,
+        our team delivers dependable craftsmanship and personalized
+        service on every project.
+        </p>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section>
+      <div class="max-w-6xl mx-auto text-center mb-10 overflow-hidden 
+        rounded-2xl bg-[#D1D5BE]/80 backdrop-blur-md p-8 md:p-12 border-white/40 border">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] mb-3">
+          Our Team
+        </h2>
+        <div class="w-70 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full mb-6"></div>
+
+        <TeamDisplay />
       </div>
     </section>
   </main>

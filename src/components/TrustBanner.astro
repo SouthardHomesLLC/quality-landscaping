@@ -1,0 +1,39 @@
+---
+// src/components/TrustBanner.astro
+
+const highlights = [
+  {
+    title: "Fully Licensed & Insured",
+    desc: "Complete coverage for your peace of mind"
+  },
+  {
+    title: "The Quality Family",
+    desc: "Backed by multi-trade structural expertise"
+  },
+  {
+    title: "Wabash Valley Native",
+    desc: "Proudly serving Terre Haute & surrounding areas"
+  },
+  {
+    title: "Free Local Estimates",
+    desc: "Transparent upfront pricing on every project"
+  }
+];
+---
+
+<section id="trust-banner" class="max-w-5xl mx-auto mt-16 px-4">
+  <div class="bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-lg border border-white/50 max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start divide-y sm:divide-y-0 lg:divide-x divide-slate-200/60">
+      {highlights.map((item, index) => (
+        <div class={`flex flex-col items-center text-center px-2 ${index > 0 ? 'pt-6 sm:pt-0' : ''} lg:first:pl-0 lg:last:pr-0`}>
+          <h3 class="text-base font-extrabold text-[#2F4340] tracking-tight mb-1">
+            {item.title}
+          </h3>
+          <p class="text-xs text-slate-600 font-medium max-w-200">
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
