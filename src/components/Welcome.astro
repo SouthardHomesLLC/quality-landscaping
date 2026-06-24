@@ -83,20 +83,11 @@ const homeSchema = JSON.stringify({
         <!-- Dynamic Call to Actions -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a 
-            href="/services" 
+            href="/contact" 
             class="w-full sm:w-auto bg-[#2F4340] text-white 
               font-bold px-8 py-3.5 rounded-xl shadow-md 
               hover:bg-[#D9744B] hover:border-slate-200 hover:border
               transition-colors duration-200 text-base"
-          >
-            Our Services
-          </a>
-          <a 
-            href="/contact" 
-            class="w-full sm:w-auto bg-white/80 backdrop-blur-sm 
-              text-[#2F4340] border border-slate-200 font-bold px-8 
-              py-3.5 rounded-xl shadow-sm hover:bg-[#D9744B] transition-colors 
-              duration-200 text-base"
           >
             Get a Quote
           </a>
@@ -136,11 +127,11 @@ const homeSchema = JSON.stringify({
       </div>   
     </section>
 
+    <!-- Trust Banner -->
+    <TrustBanner />
+
     <!-- Why Us Content -->
     <section id="why-us" class="max-w-5xl mx-auto mt-16 px-4">
-
-      <TrustBanner />
-
       <div class="bg-[#D1D5BE]/60 backdrop-blur-lg rounded-3xl 
         p-8 md:p-14 shadow-xl border border-white/40 max-w-4xl mx-auto mt-16">
         

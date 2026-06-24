@@ -3,33 +3,58 @@
 
 const highlights = [
   {
-    title: "Fully Licensed & Insured",
-    desc: "Complete coverage for your peace of mind"
+  stat: "100%",
+  title: "Licensed & Insured",
+  desc: "Complete project protection"
   },
   {
-    title: "The Quality Family",
-    desc: "Backed by multi-trade structural expertise"
-  },
-  {
+    stat: "Local",
     title: "Wabash Valley Native",
-    desc: "Proudly serving Terre Haute & surrounding areas"
+    desc: "Serving Terre Haute and beyond"
   },
   {
-    title: "Free Local Estimates",
-    desc: "Transparent upfront pricing on every project"
+    stat: "Free",
+    title: "Estimates",
+    desc: "No-obligation project quotes"
+  },
+  {
+    stat: "Family",
+    title: "Owned & Operated",
+    desc: "Multi-trade expertise"
   }
 ];
 ---
 
 <section id="trust-banner" class="max-w-5xl mx-auto mt-16 px-4">
-  <div class="bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-lg border border-white/50 max-w-4xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start divide-y sm:divide-y-0 lg:divide-x divide-slate-200/60">
-      {highlights.map((item, index) => (
-        <div class={`flex flex-col items-center text-center px-2 ${index > 0 ? 'pt-6 sm:pt-0' : ''} lg:first:pl-0 lg:last:pr-0`}>
-          <h3 class="text-base font-extrabold text-[#2F4340] tracking-tight mb-1">
+  <div class="bg-[#D1D5BE]/80 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-lg border border-white/50 max-w-4xl mx-auto">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-[#2F4340]">
+        Why Homeowners Trust Quality Landscape & Leisure
+      </h2>
+      <div class="w-60 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {highlights.map((item) => (
+        <div
+          class="group bg-white/50 backdrop-blur-sm rounded-2xl
+          border border-white/40 p-6 text-center
+          transition-all duration-300
+          hover:-translate-y-2 hover:shadow-xl hover:bg-white/70"
+        >
+          <div
+            class="text-2xl md:text-3xl font-black text-[#D9744B]
+            mb-2 transition-transform duration-300
+            group-hover:scale-110"
+          >
+            {item.stat}
+          </div>
+
+          <h3 class="text-base font-extrabold text-[#2F4340] mb-2">
             {item.title}
           </h3>
-          <p class="text-xs text-slate-600 font-medium max-w-200">
+
+          <p class="text-sm text-slate-600 font-medium">
             {item.desc}
           </p>
         </div>
