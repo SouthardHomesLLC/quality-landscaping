@@ -103,7 +103,7 @@ const homeSchema = JSON.stringify({
           <h2 class="text-3xl md:text-4xl font-bold text-[#2F4340] tracking-tight">
             Services
           </h2>
-          <div class="w-28 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full mb-6"></div>
+          <div class="w-34 h-1 bg-[#D9744B] mx-auto mt-2 rounded-full mb-6"></div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -113,17 +113,17 @@ const homeSchema = JSON.stringify({
             { title: "Property Maintenance", desc: "Routine mowing, seasonal cleanups & commercial care." },
             { title: "Outdoor Leisure", desc: "Landscape lighting, fire pits & outdoor entertainment design." }
           ].map(service => (
-            <div class="bg-white/50 backdrop-blur-sm p-6 
+            <div class="bg-white/70 backdrop-blur-sm p-6 
               rounded-2xl border border-white/40 shadow-sm text-left 
               flex flex-col justify-between
               transition-all duration-300
-              hover:-translate-y-2 hover:shadow-xl hover:bg-white/70">
+              hover:-translate-y-2 hover:shadow-xl hover:bg-white/90">
               <div>
                 <h3 class="text-xl font-bold text-[#2F4340] mb-2">{service.title}</h3>
                 <p class="text-sm text-slate-600 font-medium">{service.desc}</p>
               </div>
               <a href="/services" 
-                class="text-sm font-bold text-[#D9744B] mt-4 inline-block hover:underline">
+                class="text-md font-bold text-[#D9744B] mt-4 inline-block hover:underline">
                 Learn More →</a>
             </div>
           ))}
