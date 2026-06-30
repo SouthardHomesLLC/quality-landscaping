@@ -14,7 +14,7 @@ const mdCols = columns === 2
 
 //Grab all gallery images
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/gallery/*.{jpeg,jpg,png,gif,webp}"
+  "/src/assets/gallery/*.{jpeg,jpg,png,gif,webp,JPEG,JPG,PNG,GIF,WEBP}"
 );
 
 let galleryImages = await Promise.all(
