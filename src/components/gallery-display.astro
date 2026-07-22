@@ -3,26 +3,26 @@ import { Image, getImage } from "astro:assets";
 
 interface Props {
   limit?: number;
-  columns?: 2 | 3 ;
+  columns?: 2 | 3;
 }
 
 const { limit, columns = 3 } = Astro.props;
-
-const mdCols = columns === 2
-  ? "md:grid-cols-2"
-  : "md:grid-cols-3";
+const mdCols = columns === 2 ? "md:grid-cols-2" : "md:grid-cols-3";
+const imageSizes =
+  columns === 2
+    ? "(max-width: 640px) 100vw, 50vw"
+    : "(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw";
 
 //Grab all gallery images
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/gallery/*.{jpeg,jpg,png,gif,webp,JPEG,JPG,PNG,GIF,WEBP}"
+  "/src/assets/gallery/*.{jpeg,jpg,png,gif,webp,JPEG,JPG,PNG,GIF,WEBP}",
 );
 
 let galleryImages = await Promise.all(
   Object.entries(imageModules).map(async ([filepath, loader]) => {
     const mod = await loader();
 
-    const filename =
-      filepath.split("/").pop()?.split(".").shift() || "project";
+    const filename = filepath.split("/").pop()?.split(".").shift() || "project";
 
     const formattedAlt = filename
       .replace(/[-_]/g, " ")
@@ -30,41 +30,37 @@ let galleryImages = await Promise.all(
 
     const optimizedLargeImg = await getImage({
       src: mod.default,
-      width: 1200, 
-      format: 'webp'
+      width: 1200,
+      format: "webp",
     });
 
     return {
       metadata: mod.default,
-      lightboxSrc: optimizedLargeImg.src, //guarantees production URL
-      altText: `${formattedAlt} by Quality Landscape and Leisure`
+      lightboxSrc: optimizedLargeImg.src,
+      lightboxWidth: optimizedLargeImg.attributes.width,
+      lightboxHeight: optimizedLargeImg.attributes.height,
+      altText: `${formattedAlt} by Quality Landscape and Leisure`,
     };
-  })
+  }),
 );
 
-galleryImages.sort((a, b) =>
-  a.metadata.src.localeCompare(b.metadata.src)
-);
+galleryImages.sort((a, b) => a.metadata.src.localeCompare(b.metadata.src));
 
 const displayedImages =
-  typeof limit === "number"
-    ? galleryImages.slice(0, limit)
-    : galleryImages;
+  typeof limit === "number" ? galleryImages.slice(0, limit) : galleryImages;
 ---
 
-<div id="my-gallery" class:list={[
-    "grid grid-cols-1 sm:grid-cols-2 gap-6",
-    mdCols
-  ]}>
+<div
+  id="my-gallery"
+  class:list={["grid grid-cols-1 sm:grid-cols-2 gap-6", mdCols]}
+>
   {
     displayedImages.map((item, index) => {
-      const isCritical = index < 3;
-      
       return (
         <a
           href={item.lightboxSrc}
-          data-pswp-width={item.metadata.width}
-          data-pswp-height={item.metadata.height}
+          data-pswp-width={item.lightboxWidth}
+          data-pswp-height={item.lightboxHeight}
           target="_blank"
           rel="noreferrer"
           class="overflow-hidden rounded-2xl block aspect-4/3 sm:aspect-square md:aspect-4/3
@@ -77,10 +73,9 @@ const displayedImages =
             src={item.metadata}
             alt={item.altText}
             widths={[340, 540, 720]}
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            sizes={imageSizes}
             class="rounded-xl w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-slate-100"
-            loading={isCritical ? "eager" : "lazy"}
-            fetchpriority={isCritical ? "high" : "low"}
+            loading="lazy"
           />
         </a>
       );
@@ -95,7 +90,7 @@ const displayedImages =
   const lightbox = new PhotoSwipeLightbox({
     gallery: "#my-gallery",
     children: "a",
-    pswpModule: () => import("photoswipe")
+    pswpModule: () => import("photoswipe"),
   });
 
   lightbox.init();

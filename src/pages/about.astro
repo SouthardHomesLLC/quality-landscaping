@@ -1,79 +1,68 @@
 ---
 // src/pages/about.astro
-import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
-import TeamDisplay, {team} from '@components/TeamDisplay.astro';
-import type { teamProps } from '@scripts/TeamMemberInterfaces';
+import TeamDisplay from "@components/TeamDisplay.astro";
 
 //Targeted SEO copy configuration suite
-const pageTitle = "About Our Landscaping Company | Quality Landscape & Leisure";
-const pageDescription = "Learn about Quality Landscape and Leisure, a member of the Quality family of companies. We provide high-end hardscaping and residential landscape architecture across Terre Haute.";
-
-//AboutPage Schema to define the structural identity of the page and team profiles
-const aboutSchema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": pageTitle,
-  "description": pageDescription,
-  "mainEntity": {
-    "@type": "LandscapingService",
-    "name": "Quality Landscape and Leisure",
-    "parentOrganization": {
-      "@type": "LocalBusiness",
-      "name": "Quality Electrical & Multi-Trade Family of Companies",
-      "url": "https://qualityelectricofindiana.com"
-    },
-    "member": team.map((member: teamProps) => ({
-      "@type": "Person",
-      "name": member.name,
-      "jobTitle": member.title
-    }))
-  }
-});
+const pageMeta = {
+  title: "About Our Terre Haute Landscaping Company",
+  description:
+    "Meet the team behind Quality Landscape & Leisure and learn how we provide dependable landscaping, hardscaping, and property maintenance across the Wabash Valley.",
+};
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <script is:inline type="application/ld+json" set:html={aboutSchema}></script>
-
+<Layout title={pageMeta.title} description={pageMeta.description}>
   <Container>
-    <div id="container" class="py-16 md:py-24">
-      <main class="space-y-20">
-        
-        <section id="hero" class="max-w-4xl mx-auto px-4 text-center">
-          <div class="bg-white/60 backdrop-blur-sm p-6 md:p-10 rounded-2xl border 
-             border-white/50 shadow-sm text-lg text-slate-800 font-medium 
-             leading-relaxed space-y-6 text-left md:text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-[#2F4340] tracking-tight mb-2">
-              About Us
-            </h1>
+    <div id="container" class="py-16 md:py-24 space-y-20">
+      <section id="hero" class="max-w-4xl mx-auto px-4 text-center">
+        <div
+          class="bg-white/60 backdrop-blur-sm p-6 md:p-10 rounded-2xl border
+             border-white/50 shadow-sm text-lg text-slate-800 font-medium
+             leading-relaxed space-y-6 text-left md:text-center"
+        >
+          <h1
+            class="text-4xl md:text-5xl font-extrabold
+                text-[#2F4340] tracking-tight mb-2"
+          >
+            About Quality Landscape & Leisure
+          </h1>
+          <div class="w-58 h-1 bg-[#D9744B] mx-auto rounded-full"></div>
+          <p>
+            At <strong>Quality Landscape and Leisure</strong>, we are dedicated
+            to transforming your outdoor residential or commercial property into
+            an inviting, high-end retreat. From custom hardscapes and landscape
+            renovations to routine property maintenance, our standard is
+            perfection.
+          </p>
+          <p>
+            Backed by the trusted foundation of our multi-trade Quality family
+            of companies serving the Wabash Valley, we bring unmatched
+            reliability, structural expertise, and creative landscape design to
+            every property we touch.
+          </p>
+        </div>
+      </section>
+
+      <section id="team" class="max-w-4xl mx-auto px-4">
+        <div
+          class="bg-white/60 backdrop-blur-sm p-6 md:p-10 rounded-2xl border
+            border-white/50 shadow-sm text-lg text-slate-800 font-medium
+            leading-relaxed space-y-6 text-left md:text-center"
+        >
+          <div class="text-center mb-12">
+            <h2
+              class="text-3xl font-extrabold text-[#2F4340] tracking-tight mb-2"
+            >
+              Meet Our Team
+            </h2>
             <div class="w-58 h-1 bg-[#D9744B] mx-auto rounded-full"></div>
-            <p>
-              At <strong>Quality Landscape and Leisure</strong>, we are dedicated to transforming your outdoor residential or commercial property into an inviting, high-end retreat. From custom hardscapes and landscape renovations to routine property maintenance, our standard is perfection.
-            </p>
-            <p>
-              Backed by the trusted foundation of our multi-trade Quality family of companies serving the Wabash Valley, we bring unmatched reliability, structural expertise, and creative architectural landscaping design to every property we touch.
-            </p>
           </div>
-        </section>
 
-        <section id="team" class="max-w-4xl mx-auto px-4">
-          <div class="bg-white/60 backdrop-blur-sm p-6 md:p-10 rounded-2xl border
-            border-white/50 shadow-sm text-lg text-slate-800 font-medium 
-            leading-relaxed space-y-6 text-left md:text-center">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl font-extrabold text-[#2F4340] tracking-tight mb-2">
-                Meet Our Team
-              </h2>
-              <div class="w-58 h-1 bg-[#D9744B] mx-auto rounded-full"></div>
-            </div>
-
-            <!-- Clean abstracted team view element -->
-            <TeamDisplay />
-
-          </div>
-        </section>
-      </main>
+          <!-- Clean abstracted team view element -->
+          <TeamDisplay />
+        </div>
+      </section>
     </div>
   </Container>
 </Layout>

@@ -1,146 +1,225 @@
 ---
 //src/pages/services.astro
-import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 
+const landscapeServices = [
+  {
+    title: "Patios",
+    desc: "Custom patio installations that create comfortable, functional spaces for relaxing and entertaining outdoors.",
+  },
+  {
+    title: "Decks",
+    desc: "Outdoor deck solutions designed to expand your usable living space and complement your home and landscape.",
+  },
+  {
+    title: "Pergolas",
+    desc: "Pergola installations that add structure, shade, and visual interest to patios and backyard gathering areas.",
+  },
+  {
+    title: "LED Landscape Lighting",
+    desc: "Outdoor LED lighting that improves nighttime visibility and highlights landscaping and leisure spaces.",
+  },
+  {
+    title: "Irrigation Installation & Repair",
+    desc: "Irrigation system installation, seasonal maintenance, licensed annual backflow testing, repairs, activation, and winterization.",
+  },
+  {
+    title: "Hedge Trimming & Flower Services",
+    desc: "Hedge trimming and flower-bed services that keep planted areas neat, healthy, and inviting throughout the season.",
+  },
+];
+
 const treatmentServices = [
-  { 
-    title: "Lawn Care Program", 
-    desc: "Comprehensive 1-5 round seasonal fertilization plans, pre-emergent and post-emergent weed control, turf disease management, pest control, and core aeration."
+  {
+    title: "Lawn Care Program",
+    desc: "Comprehensive 1-5 round seasonal fertilization plans, pre-emergent and post-emergent weed control, turf disease management, pest control, and core aeration.",
   },
-  { 
-    title: "Emerald Ash Borer Treatment", 
-    desc: "Targeted April-August soil drench insecticide applications to protect vulnerable ash trees and control destructive Emerald Ash Bore infestations."
+  {
+    title: "Emerald Ash Borer Treatment",
+    desc: "Targeted April-August soil drench insecticide applications to protect vulnerable ash trees and control destructive Emerald Ash Borer infestations.",
   },
-  { 
-    title: "Summer Spray Insect Control", 
-    desc: "Early June-September spray applications targeting mites, bagworms, and invasive summertime pests on susceptible trees, shrubs, and plant materials."
+  {
+    title: "Summer Spray Insect Control",
+    desc: "Early June-September spray applications targeting mites, bagworms, and invasive summertime pests on susceptible trees, shrubs, and plant materials.",
   },
-  { 
-    title: "Dormant Oil Application", 
-    desc: "Early spring horticultural oil applications formulated for organic control of scale insects, overwintering pests, and insect eggs on landscaping plants."
+  {
+    title: "Dormant Oil Application",
+    desc: "Early spring horticultural oil applications formulated for organic control of scale insects, overwintering pests, and insect eggs on landscaping plants.",
   },
-  { 
-    title: "Spring Fungicide Spray", 
-    desc: "Targeted 3x3 protective spray applications to prevent and control leaf blight and fungal diseases on flowering trees and landscape shrubs."
+  {
+    title: "Spring Fungicide Spray",
+    desc: "Targeted 3x3 protective spray applications to prevent and control leaf blight and fungal diseases on flowering trees and landscape shrubs.",
   },
-  { 
-    title: "Irrigation System Support", 
-    desc: "Complete commercial and residential sprinkler services including spring activation, licensed annual backflow testing, repairs, and winterization blowouts."
-  }
+  {
+    title: "Seasonal Irrigation Support",
+    desc: "Complete commercial and residential sprinkler services including spring activation, licensed annual backflow testing, repairs, and winterization blowouts.",
+  },
 ];
 
 const maintenanceService = {
-  title: "Seasonal Landscape Maintenance", 
+  title: "Seasonal Landscape Maintenance",
   desc: "Custom-tailored commercial and residential yard upkeep programs designed to preserve and clean your outdoor installations all year long:",
   details: [
     "Early Spring Cut Back (February-April): Cutting back of overwintered ornamental grasses, liriope, butterfly bushes, and hydrangeas across landscape beds before new growth begins, including thorough debris removal.",
     "Spring Clean Up & Mulching (April-June): Structural pruning, deep landscape bed edging, debris removal, weed pre-emergent barriers, root fertilization, and premium mulch delivery and installation.",
     "Summer Pruning (July-September): Specialized hand-pruning of ornamental trees and evergreen shrubs to maximize inner foliage sunlight and manage landscape density.",
-    "Fall Leaf Clean Up (Oct-Dec): Cutting back cold-sensitive perennials, pulling spent annual plants, clearing heavy leaf coverage, and prepping beds for winter."
-  ]
+    "Fall Leaf Clean Up (Oct-Dec): Cutting back cold-sensitive perennials, pulling spent annual plants, clearing heavy leaf coverage, and prepping beds for winter.",
+  ],
 };
 
 //Target metadata for indexing optimization
-const pageTitle = "Lawn Care Programs & Landscape Maintenance | Terre Haute";
-const pageDescription = "Explore professional lawn care programs, irrigation system maintenance, and seasonal yard cleanups by Quality Landscape and Leisure across the Wabash Valley area.";
-
-//ItemList schema telling search crawlers exactly what services you offer explicitly
-const servicesSchema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "name": "Quality Landscape & Leisure Service Catalog",
-  "description": "Professional lawn treatment, plant health care, and yard maintenance programs in Indiana.",
-  "itemListElement": [
-    ...treatmentServices.map((s, i) => ({
-      "@type": "ListItem",
-      "position": i + 1,
-      "name": s.title,
-      "description": s.desc
-    })),
-    {
-      "@type": "ListItem",
-      "position": treatmentServices.length + 1,
-      "name": maintenanceService.title,
-      "description": maintenanceService.desc
-    }
-  ]
-});
+const pageMeta = {
+  title: "Landscaping & Hardscaping Services",
+  description:
+    "Explore patios, decks, pergolas, landscape lighting, irrigation, lawn treatment, and seasonal maintenance services in Terre Haute and the Wabash Valley.",
+};
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <!-- Injects structured index data directly into the head tracking element stream -->
-  <script is:inline type="application/ld+json" set:html={servicesSchema}></script>
-
+<Layout title={pageMeta.title} description={pageMeta.description}>
   <div class="min-h-[75vh] flex items-center justify-center py-12">
     <Container>
-
-      <section 
-        id="hero" 
+      <div
+        id="hero"
         class="max-w-7xl mx-auto px-6 py-12 bg-[#D1D5BE]/60 backdrop-blur-md rounded-2xl shadow-xl text-center border border-white/20"
       >
         <h1 class="text-5xl font-extrabold text-[#2F4340] tracking-tight mb-3">
-          Our Landscaping & Lawn Services
+          Landscaping, Outdoor Living & Lawn Services
         </h1>
         <p class="text-[#2F4340]/80 font-medium max-w-lg mx-auto mb-2">
-          Professional commercial and residential outdoor care across Terre Haute and the Wabash Valley.
+          Professional commercial and residential outdoor care across Terre
+          Haute and the Wabash Valley.
         </p>
         <p class="text-[#2F4340]/80 font-medium max-w-lg mx-auto mb-10">
-            <a href="tel:812-244-9432" 
-              class="text-[#2F4340] font-extrabold hover:text-[#D9744B] duration-300">Call Ray</a>
-            {" at "}
-            <a href="tel:812-244-9432" 
-              class="text-[#2F4340] font-extrabold underline hover:text-[#D9744B] duration-300">812-244-9432</a>
+          <a
+            href="tel:+18122449432"
+            class="text-[#2F4340] font-extrabold hover:text-[#D9744B] duration-300"
+            >Call Ray</a
+          >
+          {" at "}
+          <a
+            href="tel:+18122449432"
+            class="text-[#2F4340] font-extrabold underline hover:text-[#D9744B] duration-300"
+            >812-244-9432</a
+          >
         </p>
 
-        <!-- Main Layout Split -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left w-full mx-auto items-start">
-          
-          <!-- LEFT COLUMN: Treatment and Program Offerings -->
-          <div class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-6">
-            {treatmentServices.map((service) => (
-              <div class="bg-white/40 border border-white/20 p-5 rounded-xl
-               hover:bg-white/60 hover:scale-[1.02] transition-all duration-300
-               hover:border-[#2F4340] flex flex-col justify-between min-h-35 max-w-xl">
-                  <div>
-                    <h2 class="text-lg font-bold text-[#2F4340] mb-2">
-                        {service.title}
-                    </h2>
-                    <p class="text-sm text-gray-700 leading-relaxed">
-                        {service.desc}
-                    </p>
-                  </div>
-              </div>
-            ))}
+        <section aria-labelledby="landscape-services-heading" class="mb-16">
+          <div class="mb-8">
+            <h2
+              id="landscape-services-heading"
+              class="text-3xl font-extrabold text-[#2F4340] tracking-tight"
+            >
+              Landscape & Outdoor Living
+            </h2>
+            <div class="w-56 h-1 bg-[#D9744B] mx-auto mt-3 rounded-full"></div>
+            <p class="text-[#2F4340]/80 font-medium max-w-2xl mx-auto mt-4">
+              Build and maintain an inviting outdoor space with services for
+              residential and commercial properties across the Wabash Valley.
+            </p>
           </div>
 
-          <!-- RIGHT COLUMN: Routine & Multi-Season Care Packages -->
-          <div class="bg-white/40 border border-white/20 p-6 rounded-xl
-           hover:bg-white/60 hover:scale-[1.01] transition-all duration-300
-           hover:border-[#2F4340]">
-              <h2 class="text-xl font-bold text-[#2F4340] mb-3">
-                  {maintenanceService.title}
-              </h2>
-              <p class="text-sm text-gray-700 leading-relaxed mb-4">
-                  {maintenanceService.desc}
-              </p>
-              
-              <ul class="space-y-4 border-l-2 border-[#2F4340]/20 pl-4 ml-2">
-                {maintenanceService.details.map((detail) => (
-                  <li class="text-xs text-gray-700 leading-relaxed">
-                    <strong class="font-semibold text-[#2F4340] block text-sm mb-0.5">
-                      {detail.split(':')[0]}:
-                    </strong>
-                    <span class="text-gray-600">
-                      {detail.split(':')[1]}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 text-left"
+          >
+            {
+              landscapeServices.map((service) => (
+                <div
+                  class="bg-white/40 border border-white/20 p-6 rounded-xl
+                    hover:bg-white/60 hover:-translate-y-1 transition-all duration-300
+                    hover:border-[#2F4340]"
+                >
+                  <h3 class="text-xl font-bold text-[#2F4340] mb-2">
+                    {service.title}
+                  </h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">
+                    {service.desc}
+                  </p>
+                </div>
+              ))
+            }
           </div>
+        </section>
+
+        <section aria-labelledby="lawn-services-heading">
+          <div class="mb-8">
+            <h2
+              id="lawn-services-heading"
+              class="text-3xl font-extrabold text-[#2F4340] tracking-tight"
+            >
+              Lawn, Plant & Seasonal Care
+            </h2>
+            <div class="w-56 h-1 bg-[#D9744B] mx-auto mt-3 rounded-full"></div>
+            <p class="text-[#2F4340]/80 font-medium max-w-2xl mx-auto mt-4">
+              Protect and maintain lawns, trees, shrubs, planting beds, and
+              irrigation systems throughout the changing seasons.
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left w-full mx-auto items-start"
+          >
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              {
+                treatmentServices.map((service) => (
+                  <div
+                    class="bg-white/40 border border-white/20 p-5 rounded-xl
+                      hover:bg-white/60 hover:-translate-y-1 transition-all duration-300
+                      hover:border-[#2F4340] flex flex-col justify-between min-h-35 max-w-xl"
+                  >
+                    <div>
+                      <h3 class="text-lg font-bold text-[#2F4340] mb-2">
+                        {service.title}
+                      </h3>
+                      <p class="text-sm text-gray-700 leading-relaxed">
+                        {service.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div
+              class="bg-white/40 border border-white/20 p-6 rounded-xl
+                hover:bg-white/60 hover:-translate-y-1 transition-all duration-300
+                hover:border-[#2F4340]"
+            >
+              <h3 class="text-xl font-bold text-[#2F4340] mb-3">
+                {maintenanceService.title}
+              </h3>
+              <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                {maintenanceService.desc}
+              </p>
+
+              <ul class="space-y-4 border-l-2 border-[#2F4340]/20 pl-4 ml-2">
+                {
+                  maintenanceService.details.map((detail) => (
+                    <li class="text-xs text-gray-700 leading-relaxed">
+                      <strong class="font-semibold text-[#2F4340] block text-sm mb-0.5">
+                        {detail.split(":")[0]}:
+                      </strong>
+                      <span class="text-gray-600">{detail.split(":")[1]}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <div class="mt-12">
+          <a
+            href="/contact/"
+            class="inline-flex items-center justify-center rounded-xl bg-[#2F4340]
+              px-8 py-3.5 font-bold text-white shadow-md transition-colors
+              hover:bg-[#D9744B] focus-visible:outline-none focus-visible:ring-2
+              focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
+          >
+            Request a Landscaping Quote
+          </a>
         </div>
-      </section>
+      </div>
     </Container>
   </div>
 </Layout>

@@ -1,98 +1,180 @@
 ---
-//Layout.astro
-//Core layout wrapper handling site SEO, global styles, and shared shell components (Navbar/Footer)
-
 import { SEO } from "astro-seo";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
+
 import FooterContent from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
-import background from "@assets/background.webp"; 
-import '../styles/global.css';
+import background from "@assets/background.webp";
+import { businessData } from "../data/BusinessData";
+
+import "@styles/global.css";
 
 export interface Props {
-  title: string;
+  title?: string;
   description?: string;
   canonical?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
-//Component Props & Fallbacks
-const { 
-  title, 
-  description = "Quality Landscape and Leisure provides premium residential and commercial landscaping, lawn care, and custom hardscaping services across Terre Haute and the Wabash Valley.",
-  canonical
+const {
+  title,
+  description = businessData.description,
+  canonical,
+  image = "/opengraph.jpg",
+  noindex = false,
 } = Astro.props;
 
-//URL Management for Search & Social Networks
-//Automatically generates absolute links based on your production 'site' URL configuration
-const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString();
-const resolvedImageWithDomain = new URL("/opengraph.jpg", Astro.site).toString();
+if (!Astro.site) {
+  throw new Error(
+    "Astro.site must be configured in astro.config.mjs to generate canonical URLs.",
+  );
+}
 
-//Dynamic Title Formatting
-//Prevents duplicating the business name if a page explicitly includes it (e.g., in the gallery)
-const isBrandAppended = title.includes("Quality Landscape");
-const makeTitle = title
-  ? (isBrandAppended ? title : `${title} | Quality Landscape & Leisure`)
-  : "Quality Landscape and Leisure | Landscaping Services in Terre Haute, Indiana"; 
+const siteName = businessData.name;
+
+const pageTitle = title
+  ? `${title} | ${siteName}`
+  : "Landscaping Services in Terre Haute, IN | Quality Landscape & Leisure";
+
+const canonicalURL = canonical
+  ? new URL(canonical, Astro.site).toString()
+  : new URL(Astro.url.pathname, Astro.site).toString();
+
+const socialImageURL = new URL(image, Astro.site).toString();
+const logoURL = new URL("/logo.jpg", Astro.site).toString();
+const businessURL = new URL("/", Astro.site).toString();
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LandscapingBusiness",
+  "@id": `${businessURL}#business`,
+  name: businessData.name,
+  legalName: businessData.legalName,
+  url: businessURL,
+  telephone: businessData.phone.schema,
+  email: businessData.email,
+  logo: logoURL,
+  image: socialImageURL,
+  description: businessData.description,
+  sameAs: [businessData.urls.facebook],
+
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: businessData.address.street,
+    addressLocality: businessData.address.city,
+    addressRegion: businessData.address.state,
+    postalCode: businessData.address.postalCode,
+    addressCountry: businessData.address.country,
+  },
+
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: businessData.geo.latitude,
+    longitude: businessData.geo.longitude,
+  },
+
+  areaServed: businessData.serviceAreas.map((area) =>
+    area.type === "City"
+      ? {
+          "@type": "City",
+          name: area.name,
+          containedInPlace: {
+            "@type": "State",
+            name: area.region,
+          },
+        }
+      : {
+          "@type": "AdministrativeArea",
+          name: area.name,
+        },
+  ),
+
+  knowsAbout: businessData.services,
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
-    <!-- Base Browser Meta -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-    <link rel="icon" href="/favicon.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Search Engine & Open Graph Optimization Wrapper -->
     <SEO
-      title={makeTitle}
+      title={pageTitle}
       description={description}
       canonical={canonicalURL}
-      twitter={{ 
-        creator: "@qualitylandscapeandleisure",
-        site: "qualitylandscapeandleisure.com",
+      extend={{
+        meta: [
+          {
+            name: "robots",
+            content: noindex
+              ? "noindex, nofollow"
+              : "index, follow, max-image-preview:large",
+          },
+        ],
+      }}
+      twitter={{
         card: "summary_large_image",
+        title: pageTitle,
+        description,
+        image: socialImageURL,
       }}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: makeTitle,
-          image: resolvedImageWithDomain,
+          title: pageTitle,
+          image: socialImageURL,
+        },
+        optional: {
+          description,
+          siteName,
+          locale: "en_US",
         },
         image: {
-          alt: "Quality Landscape and Leisure - Terre Haute, IN",
+          alt: `${siteName} landscaping services in Terre Haute, Indiana`,
         },
       }}
     />
 
-    <script is:inline data-goatcounter="https://qualitylandscapeandleisure.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(localBusinessSchema)}
+    />
+
+    <script
+      is:inline
+      data-goatcounter="https://qualitylandscapeandleisure.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js"></script>
   </head>
 
-  <body class="flex flex-col min-h-screen relative overflow-x-hidden">
-    
-    <!-- Visual Enhancements: Global Full-Bleed Fixed Background -->
-    <!-- Performance Optimization: content-visibility updates rendering performance during glassmorphism scrolling -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden scale-105 z-0" style="content-visibility: auto;">
-      <Image 
-        src={background} 
-        alt="Quality Landscape project background showcasing stone and turf integration" 
-        widths={[640, 1200, 1920]} 
+  <body class="relative flex min-h-screen flex-col overflow-x-hidden">
+    <div
+      class="pointer-events-none fixed inset-0 z-0 scale-105 overflow-hidden"
+      aria-hidden="true"
+    >
+      <Image
+        src={background}
+        alt=""
+        widths={[640, 1200, 1920]}
         sizes="100vw"
-        class="w-full h-full object-cover select-none pointer-events-none"
+        class="h-full w-full select-none object-cover"
         loading="eager"
         fetchpriority="high"
       />
     </div>
 
-    <!-- UI Composition Container (Keeps footer pinned cleanly on shorter pages) -->
-    <div class="relative z-10 flex flex-col min-h-screen grow">
+    <div class="relative z-10 flex min-h-screen grow flex-col">
       <Navbar />
-      
-      <!-- Primary Page Content Area -->
+
       <main class="grow">
         <slot />
       </main>

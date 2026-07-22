@@ -1,34 +1,38 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import '@styles/global.css';
+import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import GalleryDisplay from "@components/gallery-display.astro";
 
 //Targeted SEO copy configuration suite
-const pageTitle = "Our Work Gallery | Quality Landscape & Leisure";
-const pageDescription = "Explore our commercial and residential portfolio featuring custom hardscapes, landscape lighting, and lawn maintenance throughout Terre Haute and the Wabash Valley.";
+const pageMeta = {
+  title: "Landscaping and Hardscaping Project Gallery",
+  description:
+    "View patios, retaining walls, landscape installations, outdoor lighting, and property transformations completed in Terre Haute and the Wabash Valley.",
+};
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout title={pageMeta.title} description={pageMeta.description}>
   <Container>
     <div id="container" class="py-16 md:py-24 text-center">
-      <main>
-        
-        <section id="hero" class="max-w-2xl mx-auto px-4 mb-12">
-            <div class="overflow-hidden rounded-2xl bg-[#D1D5BE]/80 p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-[#2F4340] tracking-tight mb-4">
-                    Landscaping & Hardscaping Gallery
-                </h1>
-                <p class="text-slate-800 font-semibold max-w-md mx-auto leading-relaxed">
-                    A showcase of our premium outdoor living transformations, custom patios, and lawn care projects across the Wabash Valley.
-                </p>
-            </div>
-        </section>
+      <section id="hero" class="max-w-2xl mx-auto px-4 mb-12">
+        <div class="overflow-hidden rounded-2xl bg-[#D1D5BE]/80 p-8 md:p-12">
+          <h1
+            class="text-4xl md:text-5xl font-extrabold text-[#2F4340] tracking-tight mb-4"
+          >
+            Landscaping & Hardscaping Gallery
+          </h1>
+          <p
+            class="text-slate-800 font-semibold max-w-md mx-auto leading-relaxed"
+          >
+            A showcase of our premium outdoor living transformations, custom
+            patios, and lawn care projects across the Wabash Valley.
+          </p>
+        </div>
+      </section>
 
-        <section class="max-w-6xl mx-auto px-4">
-          <GalleryDisplay />
-        </section>
-      </main>
+      <section class="max-w-6xl mx-auto px-4">
+        <GalleryDisplay />
+      </section>
     </div>
   </Container>
 </Layout>
