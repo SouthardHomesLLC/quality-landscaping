@@ -49,9 +49,12 @@ export const businessData = {
   services: [
     "Residential landscaping",
     "Commercial landscaping",
+    "Landscape design",
     "Landscape maintenance",
+    "Hardscaping",
     "Hedge trimming",
     "Flower bed services",
+    "Irrigation",
     "Irrigation system installation",
     "Irrigation system maintenance and repair",
     "Patio installation",

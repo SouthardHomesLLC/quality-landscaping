@@ -16,9 +16,10 @@ const pageMeta = {
 
 <Layout title={pageMeta.title} description={pageMeta.description}>
   <Container>
-    <div class="mx-auto max-w-3xl px-4 py-12 md:py-24">
+    <!-- Expanded container width to fit side-by-side on desktop -->
+    <div class="mx-auto max-w-6xl px-4 py-12 md:py-20">
       <section
-        class="relative z-10 rounded-3xl border border-white/40 bg-[#D1D5BE]/60 p-8 text-center shadow-xl backdrop-blur-md md:p-12"
+        class="relative z-10 overflow-hidden rounded-3xl border border-white/40 bg-[#D1D5BE]/60 p-6 text-center shadow-xl backdrop-blur-md md:p-12"
       >
         <header class="mx-auto mb-10 max-w-2xl">
           <h1
@@ -34,110 +35,131 @@ const pageMeta = {
           </p>
         </header>
 
-        <div class="mx-auto my-8 max-w-md space-y-6 text-left">
-          <!-- Phone -->
-          <div
-            class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-4 shadow-sm transition-colors hover:border-[#2F4340]"
-          >
-            <a
-              href={`tel:${businessData.phone.href}`}
-              aria-label={`Call ${businessData.name}`}
-              class="block shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm transition-colors hover:bg-[#2F4340] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
+        <!-- Two-Column Grid on Large Screens -->
+        <div
+          class="grid grid-cols-1 gap-8 text-left lg:grid-cols-2 lg:items-stretch"
+        >
+          <!-- Column 1: Contact Methods -->
+          <div class="flex flex-col justify-center space-y-4">
+            <!-- Phone Card -->
+            <div
+              class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-5 shadow-sm transition-all hover:border-[#2F4340]"
             >
-              <Icon name="mdi:phone" class="h-6 w-6" aria-hidden="true" />
-            </a>
-
-            <div>
-              <h2
-                class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
-              >
-                Call Us
-              </h2>
-
               <a
                 href={`tel:${businessData.phone.href}`}
-                class="block text-xl font-extrabold text-[#2F4340] transition-colors hover:text-[#D9744B]"
+                aria-label={`Call ${businessData.name}`}
+                class="block shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm transition-colors hover:bg-[#2F4340] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
               >
-                {businessData.phone.display}
+                <Icon name="mdi:phone" class="h-6 w-6" aria-hidden="true" />
               </a>
+
+              <div>
+                <h2
+                  class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
+                >
+                  Call Us
+                </h2>
+
+                <a
+                  href={`tel:${businessData.phone.href}`}
+                  class="block text-xl font-extrabold text-[#2F4340] transition-colors hover:text-[#D9744B]"
+                >
+                  {businessData.phone.display}
+                </a>
+              </div>
             </div>
-          </div>
 
-          <!-- Email -->
-          <div
-            class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-4 shadow-sm transition-colors hover:border-[#2F4340]"
-          >
-            <a
-              href={`mailto:${businessData.email}`}
-              aria-label={`Email ${businessData.name}`}
-              class="block shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm transition-colors hover:bg-[#2F4340] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
+            <!-- Email Card -->
+            <div
+              class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-5 shadow-sm transition-all hover:border-[#2F4340]"
             >
-              <Icon
-                name="mdi:email-outline"
-                class="h-6 w-6"
-                aria-hidden="true"
-              />
-            </a>
-
-            <div class="min-w-0">
-              <h2
-                class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
-              >
-                Email Us
-              </h2>
-
               <a
                 href={`mailto:${businessData.email}`}
-                class="block break-all text-lg font-bold text-[#2F4340] transition-colors hover:text-[#D9744B]"
+                aria-label={`Email ${businessData.name}`}
+                class="block shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm transition-colors hover:bg-[#2F4340] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
               >
-                {businessData.email}
+                <Icon
+                  name="mdi:email-outline"
+                  class="h-6 w-6"
+                  aria-hidden="true"
+                />
               </a>
+
+              <div class="min-w-0">
+                <h2
+                  class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
+                >
+                  Email Us
+                </h2>
+
+                <a
+                  href={`mailto:${businessData.email}`}
+                  class="block break-all text-lg font-bold text-[#2F4340] transition-colors hover:text-[#D9744B]"
+                >
+                  {businessData.email}
+                </a>
+              </div>
+            </div>
+
+            <!-- Address Card -->
+            <div
+              class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-5 shadow-sm transition-all hover:border-[#2F4340]"
+            >
+              <a
+                href={businessData.urls.map}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Get directions to ${businessData.name}`}
+                class="block shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm transition-colors hover:bg-[#2F4340] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
+              >
+                <Icon
+                  name="mdi:map-marker-outline"
+                  class="h-6 w-6"
+                  aria-hidden="true"
+                />
+              </a>
+
+              <div>
+                <h2
+                  class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
+                >
+                  Visit Our Office
+                </h2>
+
+                <address class="not-italic">
+                  <a
+                    href={businessData.urls.map}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block text-lg font-bold leading-snug text-[#2F4340] transition-colors hover:text-[#D9744B]"
+                  >
+                    {businessData.address.street}<br />
+                    {businessData.address.city}, {businessData.address.state}{
+                      " "
+                    }
+                    {businessData.address.postalCode}
+                  </a>
+                </address>
+              </div>
             </div>
           </div>
 
-          <!-- Address -->
+          <!-- Column 2: Google Map Container -->
           <div
-            class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-4 shadow-sm transition-colors hover:border-[#2F4340]"
+            class="relative min-h-80 w-full overflow-hidden rounded-2xl border border-white/40 shadow-sm lg:h-full"
           >
-            <a
-              href={businessData.urls.map}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Get directions to ${businessData.name}`}
-              class="block shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm transition-colors hover:bg-[#2F4340] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9744B] focus-visible:ring-offset-2"
-            >
-              <Icon
-                name="mdi:map-marker-outline"
-                class="h-6 w-6"
-                aria-hidden="true"
-              />
-            </a>
-
-            <div>
-              <h2
-                class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
-              >
-                Visit Our Office
-              </h2>
-
-              <address class="not-italic">
-                <a
-                  href={businessData.urls.map}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="block text-lg font-bold leading-snug text-[#2F4340] transition-colors hover:text-[#D9744B]"
-                >
-                  {businessData.address.street}<br />
-                  {businessData.address.city}, {businessData.address.state}{" "}
-                  {businessData.address.postalCode}
-                </a>
-              </address>
-            </div>
+            <iframe
+              title={`Map showing location of ${businessData.name}`}
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3078.340447516124!2d-87.36177178748517!3d39.50680527148194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886d6f7218f50eef%3A0xf70c3454ba453242!2sQuality%20Landscape%20and%20Leisure!5e0!3m2!1sen!2sus!4v1785256076464!5m2!1sen!2sus"
+              class="h-full w-full border-0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
         </div>
 
         <div
-          class="mt-10 border-t border-dashed border-[#2F4340]/30 pt-6 text-base font-semibold italic text-[#2F4340]"
+          class="mt-10 border-t border-dashed border-[#2F4340]/30 pt-6 text-center text-base font-semibold italic text-[#2F4340]"
         >
           We look forward to connecting and planning your project!
         </div>

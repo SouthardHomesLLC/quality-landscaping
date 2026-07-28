@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 import FooterContent from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import background from "@assets/background.webp";
-import { businessData } from "../data/BusinessData";
+import { businessData } from "@data/BusinessData";
 
 import "@styles/global.css";
 
@@ -47,7 +47,7 @@ const businessURL = new URL("/", Astro.site).toString();
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LandscapingBusiness",
+  "@type": "HomeAndConstructionBusiness",
   "@id": `${businessURL}#business`,
   name: businessData.name,
   legalName: businessData.legalName,
