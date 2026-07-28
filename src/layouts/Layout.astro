@@ -58,6 +58,7 @@ const localBusinessSchema = {
   image: socialImageURL,
   description: businessData.description,
   sameAs: [businessData.urls.facebook],
+  hasMap: businessData.urls.map,
 
   address: {
     "@type": "PostalAddress",
@@ -73,6 +74,13 @@ const localBusinessSchema = {
     latitude: businessData.geo.latitude,
     longitude: businessData.geo.longitude,
   },
+
+  openingHoursSpecification: businessData.hours.map((hours) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: hours.days,
+    opens: hours.opens,
+    closes: hours.closes,
+  })),
 
   areaServed: businessData.serviceAreas.map((area) =>
     area.type === "City"

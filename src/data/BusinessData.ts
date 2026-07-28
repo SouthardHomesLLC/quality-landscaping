@@ -41,8 +41,41 @@ export const businessData = {
       region: "Indiana",
     },
     {
+      type: "City",
+      name: "Brazil",
+      region: "Indiana",
+    },
+    {
+      type: "City",
+      name: "West Terre Haute",
+      region: "Indiana",
+    },
+    {
+      type: "City",
+      name: "North Terre Haute",
+      region: "Indiana",
+    },
+    {
+      type: "City",
+      name: "Clinton",
+      region: "Indiana",
+    },
+    {
+      type: "City",
+      name: "Seelyville",
+      region: "Indiana",
+    },
+    {
       type: "AdministrativeArea",
       name: "Wabash Valley",
+    },
+  ],
+
+  hours: [
+    {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "16:00",
     },
   ],
 

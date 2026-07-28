@@ -101,10 +101,36 @@ const pageMeta = {
               </div>
             </div>
 
-            <!-- Address Card -->
+            <!-- Business Hours Card -->
             <div
               class="flex items-center gap-5 rounded-2xl border border-white/40 bg-white/40 p-5 shadow-sm transition-all hover:border-[#2F4340]"
             >
+              <div
+                class="shrink-0 rounded-xl bg-white p-3 text-[#2F4340] shadow-sm"
+                aria-hidden="true"
+              >
+                <Icon name="mdi:clock-outline" class="h-6 w-6" />
+              </div>
+
+              <div>
+                <h2
+                  class="mb-0.5 text-xs font-bold uppercase tracking-wider text-slate-600"
+                >
+                  Business Hours
+                </h2>
+
+                <p class="text-lg font-bold text-[#2F4340]">
+                  Monday-Friday, 8:00 AM-4:00 PM
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Location and Google Map -->
+          <div
+            class="flex min-h-96 w-full flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/40 shadow-sm lg:h-full"
+          >
+            <div class="flex items-center gap-5 p-5">
               <a
                 href={businessData.urls.map}
                 target="_blank"
@@ -142,19 +168,16 @@ const pageMeta = {
                 </address>
               </div>
             </div>
-          </div>
 
-          <!-- Column 2: Google Map Container -->
-          <div
-            class="relative min-h-80 w-full overflow-hidden rounded-2xl border border-white/40 shadow-sm lg:h-full"
-          >
-            <iframe
-              title={`Map showing location of ${businessData.name}`}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3078.340447516124!2d-87.36177178748517!3d39.50680527148194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886d6f7218f50eef%3A0xf70c3454ba453242!2sQuality%20Landscape%20and%20Leisure!5e0!3m2!1sen!2sus!4v1785256076464!5m2!1sen!2sus"
-              class="h-full w-full border-0"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <div class="min-h-80 grow border-t border-white/40">
+              <iframe
+                title={`Map showing location of ${businessData.name}`}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3078.340447516124!2d-87.36177178748517!3d39.50680527148194!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x886d6f7218f50eef%3A0xf70c3454ba453242!2sQuality%20Landscape%20and%20Leisure!5e0!3m2!1sen!2sus!4v1785256076464!5m2!1sen!2sus"
+                class="h-full min-h-80 w-full border-0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
           </div>
         </div>
 
